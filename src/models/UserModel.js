@@ -1,6 +1,5 @@
-import pool from '../../server.js';
-import bcrypt from 'bcrypt';
-
+const pool = require('../../server.js');
+const bcrypt = require('bcrypt');
 class UserModel {
   static async createUser(username, email, password) {
     try {
@@ -34,4 +33,4 @@ class UserModel {
   }
 }
 
-export default UserModel;
+module.exports = UserModel;

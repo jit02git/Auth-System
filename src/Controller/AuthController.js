@@ -1,8 +1,8 @@
-import UserModel from '../models/UserModel.js';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
-import axios from 'axios';
+const UserModel = require('../models/UserModel');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const dotenv = require('dotenv');
+const axios = require('axios');
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ class AuthController {
         return res.status(400).json({ message: 'Email already in use' });
       }
       const newUser = await UserModel.createUser(username, email, password);
-      res.status(201).json({ message: 'Your are registered successfully', user: newUser });
+      res.status(201).json({ message: 'Registration successful', user: newUser });
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
@@ -60,4 +60,4 @@ class AuthController {
   }
 }
 
-export default AuthController;
+module.exports = AuthController;

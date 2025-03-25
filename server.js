@@ -1,12 +1,11 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import pg from 'pg';
-import authRoutes from './src/routes/authRoutes.js';
-import profileRoutes from './src/routes/profileRoutes.js';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+const express = require('express');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const pg = require('pg');
+const path = require('path');
+const authRoutes = require('./src/routes/AuthRoutes');
+const profileRoutes = require('./src/routes/profileRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -32,17 +31,15 @@ app.use(
 );
 
 // View Engine Setup
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 app.set('view engine', 'ejs');
-app.set('views', join(__dirname, 'src', 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
+  res.render('register', { title: 'Home' });
 });
 
 // Start Server
@@ -50,4 +47,4 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-export default pool;
+module.exports = pool;
