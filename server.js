@@ -2,8 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const pg = require('pg');
 const path = require('path');
+const pool = require('./src/config/db');
 const authRoutes = require('./src/routes/AuthRoutes');
 const profileRoutes = require('./src/routes/profileRoutes');
 
@@ -11,12 +11,7 @@ const profileRoutes = require('./src/routes/profileRoutes');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// PostgreSQL Database Connection
-const pool = new pg.Pool({
-  connectionString: process.env.DB_URL,
-});
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(express.json());
@@ -47,4 +42,4 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-module.exports = pool;
+module.exports = app;

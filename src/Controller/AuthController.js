@@ -15,6 +15,8 @@ class AuthController {
         return res.status(400).json({ message: 'Email already in use' });
       }
       const newUser = await UserModel.createUser(username, email, password);
+      console.log(newUser);
+      
       res.status(201).json({ message: 'Registration successful', user: newUser });
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
