@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h2>Profile</h2>
+    <p>ID: <%= user.id %></p>
+    <p>Username: <%= user.username %></p>
+    <p>Email: <%= user.email %></p>
+    <p>Created At: <%= user.created_at %></p>
+    <form action="/auth/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
