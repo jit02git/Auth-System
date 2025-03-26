@@ -37,9 +37,13 @@ app.get('/', (req, res) => {
   res.render('register', { title: 'Home' });
 });
 
+app.get('/auth/login', (req, res) => {
+  res.render('login', { title: 'Login' });
+});
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-module.exports = app;
+module.exports = {app};

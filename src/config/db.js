@@ -13,4 +13,4 @@ pool.connect()
   .then(() => console.log('✅ Connected to PostgreSQL'))
   .catch(err => console.error('❌ PostgreSQL Connection Error:', err));
 
-module.exports = pool;
+module.exports = {pool};

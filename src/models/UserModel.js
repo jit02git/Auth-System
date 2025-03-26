@@ -1,4 +1,4 @@
-const pool = require('../../server.js');
+const {pool} = require('../config/db');
 const bcrypt = require('bcrypt');
 class UserModel {
   static async createUser(username, email, password) {
@@ -33,4 +33,4 @@ class UserModel {
   }
 }
 
-module.exports = UserModel;
+module.exports = {UserModel};
