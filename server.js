@@ -1,23 +1,17 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import pg from 'pg';
-import authRoutes from './src/routes/authRoutes.js';
-import profileRoutes from './src/routes/profileRoutes.js';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+const express = require('express');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const path = require('path');
+const pool = require('./src/config/db');
+const authRoutes = require('./src/routes/AuthRoutes');
+const profileRoutes = require('./src/routes/profileRoutes');
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// PostgreSQL Database Connection
-const pool = new pg.Pool({
-  connectionString: process.env.DB_URL,
-});
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(express.json());
@@ -32,17 +26,19 @@ app.use(
 );
 
 // View Engine Setup
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 app.set('view engine', 'ejs');
-app.set('views', join(__dirname, 'src', 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
+  res.render('register', { title: 'Home' });
+});
+
+app.get('/auth/login', (req, res) => {
+  res.render('login', { title: 'Login' });
 });
 
 // Start Server
@@ -50,4 +46,4 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-export default pool;
+module.exports = {app};
