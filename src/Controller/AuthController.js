@@ -6,7 +6,7 @@ const axios = require('axios');
 
 dotenv.config();
 
-const {pool} = require('../config/db'); // Ensure correct DB connection import
+const {pool} = require('../config/db');
 
 
 class AuthController {
